@@ -2,6 +2,8 @@
 
 This project is a full-stack entertainment application that allows users to browse and discover movies and TV shows. Users can view trending and recommended media, get detailed information about movies and TV shows, watch trailers, and manage their bookmarks. The application includes authentication features such as signup, login, and logout.
 
+
+
 ## Table of Contents
 
 - [Folder Structure](#folder-structure)
@@ -10,9 +12,9 @@ This project is a full-stack entertainment application that allows users to brow
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
-- [Frontend Pages](#frontend-pages)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contributions](#contributions)
+
+
 
 ## Folder Structure
 
@@ -35,6 +37,8 @@ entertainment-app/
 └── README.md
 ```
 
+
+
 ## Features
 
 - User authentication (signup, login, logout)
@@ -43,6 +47,7 @@ entertainment-app/
 - View detailed information about movies and TV shows
 - Watch movie trailers
 - Bookmark movies and TV shows for later viewing
+
 
 ## Technologies Used
 
@@ -55,6 +60,7 @@ entertainment-app/
 - **JWT**: For authentication
 - **TMDB API**: for movie and TV show data
 
+
 ### Frontend
 
 - **React**: JavaScript library for building user interfaces.
@@ -64,6 +70,8 @@ entertainment-app/
 - **React Router**: Routing for navigating between pages.
 - **Tailwind CSS**: Utility-first CSS framework for responsive design.
 - **React Toastify**: Notifications for important actions (e.g., adding to cart).
+
+
 
 ## Installation
 
@@ -101,6 +109,7 @@ entertainment-app/
    npm start
    ```
 
+
 ### Frontend
 
 1. Install frontend dependencies:
@@ -115,12 +124,16 @@ entertainment-app/
    npm run dev
    ```
 
+
+
 ## Usage
 
 - Open your browser and navigate to http://localhost:3000
 - Sign up for a new account or log in if you already have one
 - Browse trending and recommended movies and TV shows
 - Search for media, view details, watch trailers, and manage bookmarks
+
+
 
 ## API Endpoints
 
@@ -131,11 +144,13 @@ entertainment-app/
 - POST /api/v1/auth/logout - Log out the current user
 - GET /api/v1/auth - Get the logged-in user
 
+
 ### Bookmark Routes
 
 - GET /api/v1/bookmarks - Get user's bookmarks
 - POST /api/v1/bookmarks - Add a new bookmark
 - DELETE /api/v1/bookmarks - Remove a bookmark
+
 
 ### Media Routes
 
@@ -151,6 +166,8 @@ entertainment-app/
 - GET /api/v1/tvshows/cast/:id - Get TV show cast by ID
 - GET /api/v1/trending - Get trending media
 - GET /api/v1/recommended - Get recommended media
+
+
 
 ## Contributions
 
