@@ -13,13 +13,13 @@ import AppError from "./AppError.js";
  */
 async function fetchFromTMDB(method, endpoint, query, next) {
   const { API_URL, API_KEY, API_READ_ACCESS_TOKEN } = process.env;
-  const url = `${API_URL}/${endpoint}?${query}`;
+  const url = `${API_URL}/${endpoint}?api_key=${API_KEY}&${query}`;
 
   const options = {
     method: method,
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${API_READ_ACCESS_TOKEN}`,
+      // Authorization: `Bearer ${API_READ_ACCESS_TOKEN}`,
     },
   };
 
