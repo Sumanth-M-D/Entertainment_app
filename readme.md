@@ -2,6 +2,18 @@
 
 This project is a full-stack entertainment application that allows users to browse and discover movies and TV shows. Users can view trending and recommended media, get detailed information about movies and TV shows, watch trailers, and manage their bookmarks. The application includes authentication features such as signup, login, and logout.
 
+## Table of Contents
+
+- [Folder Structure](#folder-structure)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Frontend Pages](#frontend-pages)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Folder Structure
 
 ```bash
@@ -22,18 +34,6 @@ entertainment-app/
 │ └── server.js
 └── README.md
 ```
-
-## Table of Contents
-
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Frontend Pages](#frontend-pages)
-- [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -152,6 +152,6 @@ entertainment-app/
 - GET /api/v1/trending - Get trending media
 - GET /api/v1/recommended - Get recommended media
 
-## Contributing
+## Contributions
 
 Contributions are welcome! Please feel free to submit a Pull Request.
