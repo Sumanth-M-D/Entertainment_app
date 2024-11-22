@@ -28,7 +28,10 @@ const createBookmarks = async function (userId, next) {
 const getBookmarks = asyncHandler(async function (req, res, next) {
   const user = req.user;
 
-  const bookmarks = await Bookmarks.findById(user.bookmarksId);
+  const bookmarks = await Bookmarks.findById(user.bookmarksId).populate(
+    "bookmarkList"
+  );
+
   respondSuccess(200, { bookmarks }, res);
 });
 

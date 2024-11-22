@@ -1,7 +1,10 @@
 import asyncHandler from "../utils/asyncHandler.js";
 import fetchFromTMDB from "../utils/fetchFromTMDB.js";
 import respondSuccess from "../utils/respondSuccess.js";
-import { formatMediaRecommendedData } from "../utils/dataFormatFactory.js";
+import {
+  formatMediaListData,
+  formatMediaRecommendedData,
+} from "../utils/dataFormatFactory.js";
 import Media from "../models/mediaModel.js";
 import mediaHandlerFactory from "./mediaHandlerFactory.js";
 
@@ -18,6 +21,32 @@ const getRecommendedMedia = asyncHandler(async (req, res, next) => {
   const mediaList = formatMediaRecommendedData(movieData, tvData);
 
   respondSuccess(200, mediaList, res);
+});
+
+// Handler function to get search media (both tv and movies)
+const getSearchMediaAll = asyncHandler(async (req, res, next) => {
+  const { page = 1, searchtext } = req.query;
+  if (!searchtext) throw new AppError("Searchtext is required", 400);
+
+  const movieEndpoint = `search/movie`;
+  const tvEndpoint = `search/tv`;
+
+  const query = `query=${searchtext}&include_adult=false&language=en-US&page=${page}`;
+
+  //  Fetch movie and tv data
+  const movieData = await fetchFromTMDB("GET", movieEndpoint, query, next);
+  const tvData = await fetchFromTMDB("GET", tvEndpoint, query, next);
+
+  // Format and combine, movie and tv data
+  const formatedMovieList = formatMediaListData(movieData, "movie");
+  const formatedTvList = formatMediaListData(tvData, "tv");
+  const combinedData = {
+    page: 1,
+    resultsMovies: formatedMovieList.results,
+    resultsTvshows: formatedTvList.results,
+  };
+
+  respondSuccess(200, combinedData, res);
 });
 
 // Function to insert a media document into the database
@@ -45,6 +74,7 @@ const getTrendingMediaAll = mediaHandlerFactory.getTrendingMedia("all");
 const commonMediaController = {
   getTrendingMediaAll,
   getRecommendedMedia,
+  getSearchMediaAll,
   insertMedia,
 };
 

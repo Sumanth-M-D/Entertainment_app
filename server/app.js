@@ -32,9 +32,9 @@ app.use(compression());
 app.use(ExpressMongoSanitize());
 
 // Mounting the API routers
-app.use("/api/media", mediaRouter);
-app.use("/api/user", userRouter);
-app.use("/api/bookmarks", bookmarkRouter);
+app.use("/api/v1/media", mediaRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/bookmarks", bookmarkRouter);
 
 // Catch-all route for handling non-existent routes with a custom error message
 app.use("*", (req, res, next) => {

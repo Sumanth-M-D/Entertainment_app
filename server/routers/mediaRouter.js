@@ -22,5 +22,5 @@ router.get("/tvshows/cast/:id", tvController.getTvShowCast);
 // Routes for common media operations
 router.get("/trending", commonMediaController.getTrendingMediaAll);
 router.get("/recommended", commonMediaController.getRecommendedMedia);
-
+router.get("/search", commonMediaController.getSearchMediaAll);
 export default router;
