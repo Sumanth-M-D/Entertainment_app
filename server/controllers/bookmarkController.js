@@ -2,6 +2,8 @@ import Bookmarks from "../models/bookmarkModel.js";
 import Media from "../models/mediaModel.js";
 import AppError from "../utils/AppError.js";
 import asyncHandler from "../utils/asyncHandler.js";
+import { formatMediaDataForBookmark } from "../utils/dataFormatFactory.js";
+import fetchFromTMDB from "../utils/fetchFromTMDB.js";
 import respondSuccess from "../utils/respondSuccess.js";
 import commonMediaController from "./commonMediaController.js";
 
@@ -28,9 +30,10 @@ const createBookmarks = async function (userId, next) {
 const getBookmarks = asyncHandler(async function (req, res, next) {
   const user = req.user;
 
-  const bookmarks = await Bookmarks.findById(user.bookmarksId).populate(
-    "bookmarkList"
-  );
+  const bookmarks = await Bookmarks.findById(user.bookmarksId).populate({
+    path: "bookmarkList",
+    select: "-_id -__v",
+  });
 
   respondSuccess(200, { bookmarks }, res);
 });
@@ -42,14 +45,25 @@ const getBookmarks = asyncHandler(async function (req, res, next) {
 
 // Function to add a media item to the user's bookmark list
 const addBookmark = asyncHandler(async function (req, res, next) {
-  const { id } = req.body;
+  const { id, type: mediaType } = req.body;
   const bookmarksId = req.user.bookmarksId;
 
-  if (!id) return next(new AppError("Please provide id of the media."));
+  if (!id || !mediaType)
+    return next(new AppError("Please provide id and type of the media."));
 
-  // Find the media item in the database if not found then insert a new document
+  // Find the media item in the database using the id
   let media = await Media.findOne({ id });
-  if (!media) media = await commonMediaController.insertMedia(req.body);
+
+  // If the media item is not found in the database, fetch it from TMDB and insert it into the database
+  if (!media) {
+    const endpoint = `${mediaType}/${id}`;
+    const query = `language=en-US`;
+
+    const data = await fetchFromTMDB("GET", endpoint, query, next);
+    const formatedData = formatMediaDataForBookmark(data, mediaType);
+
+    media = await commonMediaController.insertMedia(formatedData);
+  }
 
   // Find the bookmarks document, check if bokmark already exist, if not add the bookmark
   let bookmarks = await Bookmarks.findById(bookmarksId);
@@ -59,11 +73,16 @@ const addBookmark = asyncHandler(async function (req, res, next) {
   if (bookmarks.bookmarkList.includes(media._id))
     return next(new AppError("Media is already bookmarked", 400));
 
+  // Add the media item to the bookmark list and save the updated document
   bookmarks.bookmarkList.push(media._id);
   await bookmarks.save();
 
   // Populate the bookmarks document with media itmes details
-  bookmarks = await bookmarks.populate("bookmarkList");
+  bookmarks = await bookmarks.populate({
+    path: "bookmarkList",
+    select: "-_id -__v",
+  });
+
   respondSuccess(201, { bookmarks }, res);
 });
 
@@ -74,19 +93,24 @@ const addBookmark = asyncHandler(async function (req, res, next) {
 
 // Function to remove a media item from the user's bookmark list
 const deleteBookmark = asyncHandler(async function (req, res, next) {
-  const { _id } = req.body;
+  const { id } = req.body;
   const bookmarksId = req.user.bookmarksId;
 
-  if (!_id) return next(new AppError("Please provide id of the media."));
+  if (!id) return next(new AppError("Please provide id of the media."));
 
-  // Find the bookmarks document
+  // Find the bookmarks document related to the user, using the bookmarksId
   let bookmarks = await Bookmarks.findById(bookmarksId);
   if (!bookmarks)
     return next(new AppError("Bookmarks List doesnt exist for this user", 400));
 
+  // Find the media item in the database using the id
+  let media = await Media.findOne({ id });
+  if (!media)
+    return next(new AppError("Media not bookmarked or invalid Id", 404));
+
   // Filter out the media item from the bookmark list
   const filteredBookmarkList = bookmarks.bookmarkList.filter(
-    (ele) => ele.toString() !== _id.toString()
+    (ele) => ele.toString() !== media._id.toString()
   );
 
   // If the media item was not found in the bookmark list, return an error
@@ -98,7 +122,11 @@ const deleteBookmark = asyncHandler(async function (req, res, next) {
   await bookmarks.save();
 
   // Populate the bookmarkList field with the media items' details
-  bookmarks = await bookmarks.populate("bookmarkList");
+  bookmarks = await bookmarks.populate({
+    path: "bookmarkList",
+    select: "-_id -__v",
+  });
+
   respondSuccess(200, { bookmarks }, res);
 });
 

@@ -1,5 +1,7 @@
+import Error from "../components/general/Error";
+
 function PageNotFound() {
-  return <div>PageNotFound</div>;
+  return <Error error={{ message: "Page not found" }} />;
 }
 
 export default PageNotFound;

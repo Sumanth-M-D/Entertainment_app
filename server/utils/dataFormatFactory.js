@@ -1,3 +1,4 @@
+import AppError from "./AppError.js";
 import shuffleTwoArrays from "./shuffleArrays.js";
 
 //Formats the media list data from the API response.
@@ -9,7 +10,7 @@ function formatMediaListData(data, mediaType) {
       id: result.id,
       type: mediaType,
       title: result.title || result.name,
-      overview: result.overview,
+      // overview: result.overview,
       releaseDate: result.release_date || result.first_air_date,
       backdropPath: result.backdrop_path,
     };
@@ -23,6 +24,7 @@ function formatMediaListData(data, mediaType) {
 function formatMediaDetailsData(data, mediaType) {
   const formatedData = {
     id: data.id,
+    type: mediaType,
     title: data.title || data.name,
     overview: data.overview,
     tagline: data.tagline || "",
@@ -50,7 +52,7 @@ function formatMediaDetailsData(data, mediaType) {
 
 //Formats the media URL data (e.g., video trailers) from the API response.
 function formatMediaUrlData(data) {
-  const trailerData = data.results.find(
+  let trailerData = data.results.find(
     (ele) =>
       ele.site === "YouTube" &&
       ele.official === true &&
@@ -102,10 +104,21 @@ function formatMediaRecommendedData(movieData, tvData) {
   return formatedData;
 }
 
+function formatMediaDataForBookmark(data, mediaType) {
+  return {
+    id: data.id,
+    type: mediaType,
+    title: data.title || data.name,
+    releaseDate: data.release_date || data.first_air_date,
+    backdropPath: data.backdrop_path,
+  };
+}
+
 export {
   formatMediaUrlData,
   formatMediaListData,
   formatMediaDetailsData,
   formatMediaCastData,
   formatMediaRecommendedData,
+  formatMediaDataForBookmark,
 };

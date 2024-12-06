@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [ "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -10,6 +9,7 @@ export default {
         tertiary: "#5a698f",
         black: "#10141e",
         white: "#fff",
+        yellow: "",
       },
       screens: {
         xs: "540px",
@@ -17,8 +17,10 @@ export default {
       fontFamily: {
         outfit: ["Outfit", "serif"],
       },
+      animation: {
+        "spin-slow": "spin 2s linear infinite",
+      },
     },
   },
-  plugins: [],
-}
-
+  plugins: ["prettier-plugin-tailwindcss"],
+};

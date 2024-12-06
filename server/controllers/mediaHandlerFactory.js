@@ -92,6 +92,10 @@ function getMediaUrlById(mediaType = "movie") {
     }
 
     const data = await fetchFromTMDB("GET", endpoint, query, next);
+
+    if (data.results.length === 0)
+      return next(new AppError("No trailer found", 404));
+
     const urlData = formatMediaUrlData(data, mediaType);
 
     respondSuccess(200, urlData, res);

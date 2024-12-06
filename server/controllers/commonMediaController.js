@@ -7,6 +7,7 @@ import {
 } from "../utils/dataFormatFactory.js";
 import Media from "../models/mediaModel.js";
 import mediaHandlerFactory from "./mediaHandlerFactory.js";
+import shuffleTwoArrays from "../utils/shuffleArrays.js";
 
 // Handler function to get recommended media
 const getRecommendedMedia = asyncHandler(async (req, res, next) => {
@@ -40,11 +41,30 @@ const getSearchMediaAll = asyncHandler(async (req, res, next) => {
   // Format and combine, movie and tv data
   const formatedMovieList = formatMediaListData(movieData, "movie");
   const formatedTvList = formatMediaListData(tvData, "tv");
+
   const combinedData = {
     page: 1,
-    resultsMovies: formatedMovieList.results,
-    resultsTvshows: formatedTvList.results,
+    results: shuffleTwoArrays(
+      formatedMovieList.results,
+      formatedTvList.results
+    ),
   };
+
+  // Sorting based on year
+  // const combinedData = {
+  //   page: 1,
+  //   results: [...formatedMovieList.results, ...formatedTvList.results].sort(
+  //     (a, b) => {
+  //       const dateA = a.releaseDate
+  //         ? Number(a.releaseDate.slice(0, 4))
+  //         : "1000";
+  //       const dateB = b.releaseDate
+  //         ? Number(b.releaseDate.slice(0, 4))
+  //         : "1000";
+  //       return dateB - dateA;
+  //     }
+  //   ),
+  // };
 
   respondSuccess(200, combinedData, res);
 });
@@ -56,7 +76,7 @@ async function insertMedia(data) {
       id: data.id,
       type: data.type || "",
       title: data.title || "",
-      overview: data.overview || "",
+      // overview: data.overview || "",
       releaseDate: data.releaseDate || "",
       backdropPath: data.backdropPath || "",
     };

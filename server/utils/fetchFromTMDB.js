@@ -11,9 +11,13 @@ import AppError from "./AppError.js";
  * @returns {Object} The data fetched from the TMDB API.
  * @throws {AppError} Throws an AppError if the fetch request fails.
  */
+
 async function fetchFromTMDB(method, endpoint, query, next) {
   const { API_URL, API_KEY, API_READ_ACCESS_TOKEN } = process.env;
   const url = `${API_URL}/${endpoint}?api_key=${API_KEY}&${query}`;
+
+  const maxRetries = 4;
+  let attempts = 0;
 
   const options = {
     method: method,
@@ -23,13 +27,16 @@ async function fetchFromTMDB(method, endpoint, query, next) {
     },
   };
 
-  try {
-    const res = await fetch(url, options);
-    if (!res.ok) throw new AppError(res.statusText, 404);
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    throw err;
+  while (attempts < maxRetries) {
+    try {
+      const res = await fetch(url, options);
+      if (!res.ok) throw new AppError(res.statusText, 404);
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      attempts += 1;
+      if (attempts >= maxRetries) throw err;
+    }
   }
 }
 
