@@ -15,28 +15,29 @@ import {
   setBookmarkLoading,
 } from "./features/bookmarkSlice";
 
-// import PageNotFound from "./pages/PageNotFound";
-// import HomePage from "./pages/HomePage";
-// import MoviesPage from "./pages/MoviesPage";
-// import TVShowsPage from "./pages/TVShowsPage";
-// import MediaDetailsPage from "./pages/MediaDetailsPage";
-// import BookmarksPage from "./pages/BookmarksPage";
-// import UserAccountPage from "./pages/UserAccountPage";
-// import LoginPage from "./pages/LoginPage";
-// import SignupPage from "./pages/SignupPage";
-// import VideoModal from "./components/general/VideoModal";
+import PageNotFound from "./pages/PageNotFound";
+import HomePage from "./pages/HomePage";
+import MoviesPage from "./pages/MoviesPage";
+import TVShowsPage from "./pages/TVShowsPage";
+import MediaDetailsPage from "./pages/MediaDetailsPage";
+import BookmarksPage from "./pages/BookmarksPage";
+import UserAccountPage from "./pages/UserAccountPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import VideoModal from "./components/general/VideoModal";
+import Protected from "./components/general/Protected";
 
-const PageNotFound = lazy(() => import("./pages/PageNotFound"));
-const HomePage = lazy(() => import("./pages/HomePage"));
-const MoviesPage = lazy(() => import("./pages/MoviesPage"));
-const TVShowsPage = lazy(() => import("./pages/TVShowsPage"));
-const MediaDetailsPage = lazy(() => import("./pages/MediaDetailsPage"));
-const BookmarksPage = lazy(() => import("./pages/BookmarksPage"));
-const UserAccountPage = lazy(() => import("./pages/UserAccountPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage"));
-const SignupPage = lazy(() => import("./pages/SignupPage"));
-const VideoModal = lazy(() => import("./components/general/VideoModal"));
-const Protected = lazy(() => import("./components/general/Protected"));
+// const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+// const HomePage = lazy(() => import("./pages/HomePage"));
+// const MoviesPage = lazy(() => import("./pages/MoviesPage"));
+// const TVShowsPage = lazy(() => import("./pages/TVShowsPage"));
+// const MediaDetailsPage = lazy(() => import("./pages/MediaDetailsPage"));
+// const BookmarksPage = lazy(() => import("./pages/BookmarksPage"));
+// const UserAccountPage = lazy(() => import("./pages/UserAccountPage"));
+// const LoginPage = lazy(() => import("./pages/LoginPage"));
+// const SignupPage = lazy(() => import("./pages/SignupPage"));
+// const VideoModal = lazy(() => import("./components/general/VideoModal"));
+// const Protected = lazy(() => import("./components/general/Protected"));
 
 function App() {
   const dispatch = useDispatch();
