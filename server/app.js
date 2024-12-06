@@ -17,7 +17,8 @@ const { CLIENT_URL } = process.env;
 const app = express(); // Initialize express application
 
 // Middleware for handling CORS with the specified client URL and enabling credentials (cookies)
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: CLIENT_URL, credentials: true }));
+// app.use(cors({ origin: true, credentials: true }));
 
 // Middleware for parsing cookies in incoming requests
 app.use(cookieParser());
