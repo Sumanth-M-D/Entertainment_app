@@ -7,7 +7,7 @@ import {
   setBookmarks,
   setBookmarkError,
   setBookmarkLoading,
-} from "./features/bookmarkSlice";
+} from "../features/bookmarkSlice";
 
 export function useLoadUserBookmarks() {
   const dispatch = useDispatch();
