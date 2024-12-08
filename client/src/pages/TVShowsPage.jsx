@@ -14,7 +14,6 @@ function TVShowsPage() {
           <SearchBar placeholder="Search for TV shows" />
           {searchText && <SearchResults type={"tvshows"} />}
           {!searchText && <TvShows />}
-          <TvShows />
         </div>
       </Applayout>
     </div>

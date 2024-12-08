@@ -37,8 +37,8 @@ export const mediaApi = createApi({
 
     // Media list endpoint
     getMediaList: builder.query({
-      query: (type) => ({
-        url: `media/${type === "movie" ? "movies" : "tvshows"}`,
+      query: ({ type, page = 1 }) => ({
+        url: `media/${type === "movie" ? "movies" : "tvshows"}?page=${page}`,
       }),
       transformResponse: (response) => response.data.results,
       transformErrorResponse: (error) => error.data,
