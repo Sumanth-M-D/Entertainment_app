@@ -132,7 +132,10 @@ export const mediaApi = createApi({
 
     postLogoutUser: builder.mutation({
       query: () => ({ url: "user/logout", method: "POST" }),
-      transformResponse: (response) => response.data,
+      transformResponse: (response) => {
+        console.log(response);
+        return response.data;
+      },
       transformErrorResponse: (error) => {
         return error.data;
       },

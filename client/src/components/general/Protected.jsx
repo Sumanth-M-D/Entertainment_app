@@ -9,7 +9,7 @@ function Protected({ children }) {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      toast.error("Please login to access this");
+      toast.error("Please login to access Bookmarks");
       navigate("/login", { replace: true });
     }
   }, [isAuthenticated, navigate]);

@@ -6,11 +6,9 @@ function MediaDetailsPage({ type }) {
   const { id } = useParams();
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-x-hidden">
       <Applayout>
-        <div className="">
-          <MediaDetails id={id} type={type} />
-        </div>
+        <MediaDetails id={id} type={type} />
       </Applayout>
     </div>
   );

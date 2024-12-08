@@ -37,7 +37,12 @@ function App() {
   const { isUserDataLoading } = useLoadLoggedInUserData();
   const { isBookmarksLoading } = useLoadUserBookmarks();
 
-  if (isUserDataLoading || isBookmarksLoading) return <Loader />;
+  if (isUserDataLoading || isBookmarksLoading)
+    return (
+      <div className="my-56 w-screen flex justify-center">
+        <Loader />
+      </div>
+    );
 
   return (
     <BrowserRouter>

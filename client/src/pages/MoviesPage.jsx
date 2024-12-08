@@ -8,7 +8,7 @@ function MoviesPage() {
   const { searchText } = useSelector((state) => state.searchText);
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-x-hidden">
       <Applayout>
         <div className="">
           <SearchBar placeholder="Search for movies " />

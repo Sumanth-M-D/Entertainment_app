@@ -33,7 +33,7 @@ function Navbar() {
   }
 
   return (
-    <nav className="bg-secondary md:w-14  p-3 flex flex-row md:flex-col items-center h-14 md:h-[650px] justify-between md:justify-start rounded-lg">
+    <nav className="bg-secondary md:w-14 p-3 flex flex-row md:flex-col  items-center h-14 md:h-[650px] justify-between md:justify-start rounded-lg z-50">
       <Logo handleClick={handleClick} />
       <div className="md:mt-20 text-xl  flex md:flex-col flex-row gap-5">
         {navLinks.map((link, index) => (

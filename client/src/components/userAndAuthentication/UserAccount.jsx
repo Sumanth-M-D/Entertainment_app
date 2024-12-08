@@ -7,6 +7,7 @@ import { usePostLogoutUserMutation } from "../../features/mediaApi";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { resetUserData } from "../../features/userSlice";
+import { resetBookmarkState } from "../../features/bookmarkSlice";
 
 function UserAccount() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -23,6 +24,7 @@ function UserAccount() {
   function handleLogout() {
     postLogoutUser();
     dispatch(resetUserData());
+    dispatch(resetBookmarkState());
 
     navigate("/");
     toast.success("Logged out successfully", { autoClose: 1000 });

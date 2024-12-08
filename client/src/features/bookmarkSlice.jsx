@@ -22,10 +22,19 @@ const bookmarkSlice = createSlice({
     setBookmarkLoading(state, action) {
       state.isLoading = action.payload;
     },
+    resetBookmarkState(state) {
+      state.bookmarks = [];
+      state.error = "";
+      state.isLoading = "";
+    },
   },
 });
 
-export const { setBookmarks, setBookmarkError, setBookmarkLoading } =
-  bookmarkSlice.actions;
+export const {
+  setBookmarks,
+  setBookmarkError,
+  setBookmarkLoading,
+  resetBookmarkState,
+} = bookmarkSlice.actions;
 
 export default bookmarkSlice.reducer;

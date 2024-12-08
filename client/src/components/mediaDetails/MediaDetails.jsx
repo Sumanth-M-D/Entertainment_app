@@ -22,7 +22,12 @@ function MediaDetails({ id, type }) {
     isLoading: castsIsLoading,
   } = useGetMediaCastQuery({ id, type });
 
-  if (mediaDetailsLoading || castsIsLoading) return <Loader />;
+  if (mediaDetailsLoading || castsIsLoading)
+    return (
+      <div className="my-56 w-screen flex justify-center">
+        <Loader />
+      </div>
+    );
 
   if (mediaDetailsError) return <Error error={mediaDetailsError} />;
 

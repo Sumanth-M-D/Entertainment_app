@@ -3,7 +3,7 @@ import Bookmarks from "../components/Bookmarks";
 
 function BookmarksPage() {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-x-hidden">
       <Applayout>
         <div className="">
           <Bookmarks />

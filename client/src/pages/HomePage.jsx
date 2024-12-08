@@ -9,7 +9,7 @@ function HomePage() {
   const { searchText } = useSelector((state) => state.searchText);
 
   return (
-    <div className="overflow-hidden">
+    <div className="">
       <Applayout>
         <div className="">
           <SearchBar />

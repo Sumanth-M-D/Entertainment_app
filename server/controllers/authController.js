@@ -108,7 +108,12 @@ const login = asyncHandler(async function (req, res, next) {
 
 // Logout function to clear the user's JWT cookie
 const logout = asyncHandler(async function (req, res, next) {
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    sameSite: "none",
+    secure: NODE_ENV === "production",
+  });
+
   respondSuccess(200, {}, res);
 });
 
