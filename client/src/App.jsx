@@ -2,11 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
-// import { lazy, Suspense } from "react";
 import Loader from "./components/general/Loader";
-
-import { useLoadLoggedInUserData } from "./custom_hooks/useLoadLoggedInUserData";
-import { useLoadUserBookmarks } from "./custom_hooks/useLoadUserBookmarks";
 
 import PageNotFound from "./pages/PageNotFound";
 import HomePage from "./pages/HomePage";
@@ -20,17 +16,8 @@ import SignupPage from "./pages/SignupPage";
 import VideoModal from "./components/general/VideoModal";
 import Protected from "./components/general/Protected";
 
-// const PageNotFound = lazy(() => import("./pages/PageNotFound"));
-// const HomePage = lazy(() => import("./pages/HomePage"));
-// const MoviesPage = lazy(() => import("./pages/MoviesPage"));
-// const TVShowsPage = lazy(() => import("./pages/TVShowsPage"));
-// const MediaDetailsPage = lazy(() => import("./pages/MediaDetailsPage"));
-// const BookmarksPage = lazy(() => import("./pages/BookmarksPage"));
-// const UserAccountPage = lazy(() => import("./pages/UserAccountPage"));
-// const LoginPage = lazy(() => import("./pages/LoginPage"));
-// const SignupPage = lazy(() => import("./pages/SignupPage"));
-// const VideoModal = lazy(() => import("./components/general/VideoModal"));
-// const Protected = lazy(() => import("./components/general/Protected"));
+import { useLoadLoggedInUserData } from "./custom_hooks/useLoadLoggedInUserData";
+import { useLoadUserBookmarks } from "./custom_hooks/useLoadUserBookmarks";
 
 function App() {
   const { mediaId } = useSelector((state) => state.videoModal);
@@ -46,7 +33,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <Suspense fallback={<Loader />}> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
@@ -55,7 +41,6 @@ function App() {
           path="/bookmarks"
           element={
             <Protected>
-              {" "}
               <BookmarksPage />
             </Protected>
           }
@@ -93,8 +78,9 @@ function App() {
         theme="dark"
         transition:Bounce
       />
+
+      {/* For trailer videoModals */}
       {mediaId && <VideoModal />}
-      {/* </Suspense> */}
     </BrowserRouter>
   );
 }

@@ -9,23 +9,27 @@ import { toast } from "react-toastify";
 import { AiOutlineLoading } from "react-icons/ai";
 
 function Bookmark({ isBookmarked, id, mediaType }) {
+  const dispatch = useDispatch();
+
+  // Getting Add and Delete Bookmark functions from the MediaApi
   const [addUserBookmark, { isLoading: isAddingBookmark }] =
     useAddUserBookmarkMutation();
-
   const [deleteUserBookmark, { isLoading: isDeletingBookmark }] =
     useDeleteUserBookmarkMutation();
 
+  // Check if the bookmark is updating
   const isUpdatingBookmark = isAddingBookmark || isDeletingBookmark;
 
-  const dispatch = useDispatch();
-
+  // Handle the bookmark click
   async function handleClick() {
     try {
+      // If the media is already bookmarked, delete the bookmark and update the store
       if (isBookmarked) {
         const updatedBookmarks = await deleteUserBookmark({ id }).unwrap();
         dispatch(setBookmarks(updatedBookmarks));
       }
 
+      // If the media is not bookmarked, add the bookmark and update the store
       if (!isBookmarked) {
         const updatedBookmarks = await addUserBookmark({
           id,
@@ -56,5 +60,3 @@ function Bookmark({ isBookmarked, id, mediaType }) {
 }
 
 export default Bookmark;
-<FaBookmark />;
-<FaRegBookmark />;

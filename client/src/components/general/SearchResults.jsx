@@ -4,8 +4,10 @@ import { useGetSearchMediaQuery } from "../../features/mediaApi";
 import { useSelector } from "react-redux";
 
 function SearchResults({ type }) {
+  // Get the search text from the store
   const { searchText } = useSelector((state) => state.searchText);
 
+  // Fetch search results based on the search text
   const {
     data: searchResults = {},
     error: searchError,

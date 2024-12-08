@@ -1,5 +1,6 @@
 import Logo from "../general/Logo";
 
+// Layout for the authentication pages
 function AuthLayout({ children }) {
   return (
     <div className="flex items-center justify-center min-h-screen">

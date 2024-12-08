@@ -4,6 +4,7 @@ import ContentHeading from "./general/ContentHeading";
 import MediaList from "./mediaList/MediaList";
 
 function Bookmarks() {
+  // Get the bookmarks from the store
   const { bookmarks, isLoading, error } = useSelector(
     (state) => state.bookmark,
   );
@@ -20,11 +21,3 @@ function Bookmarks() {
 }
 
 export default Bookmarks;
-
-// 1241982;
-// 113779;
-// 112470;
-// 247885;
-// 249010;
-// 957119;
-// 248890;

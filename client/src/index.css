@@ -63,6 +63,5 @@ input:-ms-input-placeholder {
 
   .mediaSectionContainer {
     @apply mt-12;
-    /* @apply mt-12 w-screen pr-8 md:pr-36; */
   }
 }

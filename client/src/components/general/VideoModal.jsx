@@ -10,23 +10,30 @@ import Loader from "./Loader";
 import { toast } from "react-toastify";
 
 function VideoModal() {
+  // Get the video modal state from the store
   const { isOpen, mediaId, mediaType } = useSelector(
     (state) => state.videoModal,
   );
+
   const dispatch = useDispatch();
+
+  // Fetch the video key based on the media id and type
   const {
     data: videoKey,
     error,
     isLoading,
   } = useGetMediaUrlQuery({ id: mediaId, type: mediaType });
 
+  // Show the youtube video if the video key is available and there is no error
   const showYoutube = videoKey && !isLoading && !error;
 
+  // Close the modal when the user clicks outside the video
   function handleCloseModal(e) {
     e.stopPropagation();
     dispatch(closeVideoModal());
   }
 
+  // Options for the youtube video player
   const videoOptions = {
     width: "100%",
     height: "100%",
@@ -35,6 +42,7 @@ function VideoModal() {
     },
   };
 
+  // Show an error toast if there is an error
   if (error) {
     dispatch(resetVideoState());
     return toast.error(error.message);
@@ -56,7 +64,9 @@ function VideoModal() {
             >
               <IoMdClose />
             </button>
+            {/* Show loader if data is loading */}
             {isLoading && <Loader />}
+
             {showYoutube && (
               <YouTube
                 videoId={videoKey}

@@ -3,6 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const mediaApi = createApi({
   reducerPath: "mediaApi",
+
+  // Base query for the API
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
     credentials: "include",
@@ -13,7 +15,9 @@ export const mediaApi = createApi({
   }),
   tagTypes: ["Bookmarks"], // Add tag types for cache invalidation
 
+  // API
   endpoints: (builder) => ({
+    // Trending media endpoint
     getTrendingMedia: builder.query({
       query: () => ({ url: "media/trending" }),
       transformResponse: (response) => response.data.results,
@@ -22,6 +26,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // Recommended media endpoint
     getRecommendedMedia: builder.query({
       query: () => ({ url: "media/recommended" }),
       transformResponse: (response) => response.data,
@@ -30,6 +35,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // Media list endpoint
     getMediaList: builder.query({
       query: (type) => ({
         url: `media/${type === "movie" ? "movies" : "tvshows"}`,
@@ -38,6 +44,7 @@ export const mediaApi = createApi({
       transformErrorResponse: (error) => error.data,
     }),
 
+    // Media details endpoint
     getMediaDetails: builder.query({
       query: ({ id, type }) => {
         return {
@@ -50,6 +57,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // Media URL endpoint
     getMediaUrl: builder.query({
       query: ({ id, type }) => {
         return {
@@ -62,6 +70,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // Media cast endpoint
     getMediaCast: builder.query({
       query: ({ id, type }) => {
         return {
@@ -74,6 +83,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // Search media endpoint
     getSearchMedia: builder.query({
       query: ({ searchText, type }) => {
         let typeParam;
@@ -98,6 +108,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // User login endpoint
     postUserLogin: builder.mutation({
       query: ({ email, password }) => ({
         url: "user/login",
@@ -110,6 +121,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // User signup endpoint
     postUserSignup: builder.mutation({
       query: ({ email, password, passwordConfirm }) => ({
         url: "user/signup",
@@ -122,6 +134,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // Get logged in user endpoint
     getLoggedInUser: builder.query({
       query: () => ({ url: "user" }),
       transformResponse: (response) => response.data.user,
@@ -130,6 +143,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // Logout user endpoint
     postLogoutUser: builder.mutation({
       query: () => ({ url: "user/logout", method: "POST" }),
       transformResponse: (response) => {
@@ -141,6 +155,7 @@ export const mediaApi = createApi({
       },
     }),
 
+    // User bookmarks endpoints
     getUserBookmarks: builder.query({
       query: () => ({ url: "bookmarks" }),
       transformResponse: (response) => {
@@ -152,6 +167,7 @@ export const mediaApi = createApi({
       providesTags: ["Bookmarks"], // Provide tags for cache invalidation
     }),
 
+    // Add user bookmark endpoint
     addUserBookmark: builder.mutation({
       query: ({ id, type }) => ({
         url: `bookmarks`,
@@ -165,6 +181,7 @@ export const mediaApi = createApi({
       invalidatesTags: ["Bookmarks"],
     }),
 
+    // Delete user bookmark endpoint
     deleteUserBookmark: builder.mutation({
       query: ({ id }) => ({
         url: `bookmarks`,

@@ -14,13 +14,16 @@ function UserAccount() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Links for authentication
   const authenticationLinks = [
     { name: "SignUp", path: "/signup", icon: <MdAccountCircle /> },
     { name: "Login", path: "/login", icon: <IoMdLogIn /> },
   ];
 
+  // Mutation to logout the user
   const [postLogoutUser, { error: logoutError }] = usePostLogoutUserMutation();
 
+  // Function to handle the logout
   function handleLogout() {
     postLogoutUser();
     dispatch(resetUserData());
@@ -30,6 +33,7 @@ function UserAccount() {
     toast.success("Logged out successfully", { autoClose: 1000 });
   }
 
+  // Show error message if logout fails
   useEffect(() => {
     if (logoutError) {
       toast.error(logoutError.message || "Error logging out");
@@ -38,6 +42,7 @@ function UserAccount() {
 
   return (
     <div className="w-96 bg-secondary h-[580px] text-lg rounded-xl p-10">
+      {/* If user is authenticated then show user details with logout button */}
       {isAuthenticated && (
         <>
           <div className="flex flex-col items-center justify-center gap-4 p-4 mb-10 text-primary font-semibold  border-primary border-2 rounded-lg ">
@@ -54,6 +59,7 @@ function UserAccount() {
         </>
       )}
 
+      {/* If user is not authenticated then show authentication links */}
       {!isAuthenticated && (
         <div className="">
           {authenticationLinks.map((link) => (

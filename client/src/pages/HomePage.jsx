@@ -9,9 +9,9 @@ function HomePage() {
   const { searchText } = useSelector((state) => state.searchText);
 
   return (
-    <div className="">
+    <div>
       <Applayout>
-        <div className="">
+        <div>
           <SearchBar />
           {searchText && <SearchResults type={"all"} />}
           {!searchText && (

@@ -9,14 +9,18 @@ import {
   setBookmarkLoading,
 } from "../features/bookmarkSlice";
 
+// Custom hook to load the user's bookmarks
 export function useLoadUserBookmarks() {
   const dispatch = useDispatch();
 
+  // Get the user's authentication status
   const { isAuthenticated } = useSelector((state) => state.user);
 
+  // Get the user's bookmarks from the server
   const [getUserBookmarks, { isLoading: isBookmarksLoading }] =
     useLazyGetUserBookmarksQuery();
 
+  // Load the user's bookmarks to the store
   useEffect(() => {
     async function loadBookmarks() {
       try {

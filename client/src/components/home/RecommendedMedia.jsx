@@ -3,6 +3,7 @@ import ContentHeading from "../general/ContentHeading";
 import MediaList from "../mediaList/MediaList";
 
 function RecommendedMedia() {
+  // Fetch the recommended media
   const {
     data: recommendedMedia = [],
     error,

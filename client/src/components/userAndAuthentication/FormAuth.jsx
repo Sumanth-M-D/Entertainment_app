@@ -1,6 +1,7 @@
 import ButtonPrimary from "../general/ButtonPrimary";
 import InputAuth from "./InputAuth";
 
+// Form component for the authentication pages
 function FormAuth({
   onSubmit,
   inputFields,

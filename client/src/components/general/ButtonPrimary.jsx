@@ -1,6 +1,6 @@
 function ButtonPrimary({
   children,
-  type = "button",
+  type = "button", // button | submit
   onClick = () => {},
   isLoading,
 }) {

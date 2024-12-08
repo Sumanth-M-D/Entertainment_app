@@ -6,6 +6,7 @@ const initialState = {
   mediaType: "",
 };
 
+// Slice for the video modal
 const videoModalSlice = createSlice({
   name: "videoModalSlice",
   initialState,

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+// Component to change the authentication link :- Login <-> Sign up
 function ChangeAuthLink({ toAuthType }) {
   return (
     <div className="flex justify-center gap-3 text-sm">

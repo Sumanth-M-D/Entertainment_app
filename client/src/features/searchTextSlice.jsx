@@ -5,6 +5,7 @@ const initialState = {
   inputText: "",
 };
 
+// Slice for the search text
 const searchTextSlice = createSlice({
   name: "searchText",
   initialState,

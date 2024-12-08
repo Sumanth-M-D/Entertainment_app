@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 function PlayButton({ id, type }) {
   const dispatch = useDispatch();
 
+  // Function to handle the play button click
   function handlePlayClick() {
     dispatch(openVideoModal({ id, type }));
   }

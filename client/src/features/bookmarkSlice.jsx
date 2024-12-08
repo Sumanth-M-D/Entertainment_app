@@ -6,6 +6,7 @@ const initialState = {
   isLoading: "",
 };
 
+// Slice for the bookmarks
 const bookmarkSlice = createSlice({
   name: "bookmarkSlice",
   initialState,

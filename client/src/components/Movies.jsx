@@ -3,6 +3,7 @@ import ContentHeading from "./general/ContentHeading";
 import MediaList from "./mediaList/MediaList";
 
 function Movies() {
+  // Get the list of movies
   const { data: movies = [], error, isLoading } = useGetMediaListQuery("movie");
 
   return (

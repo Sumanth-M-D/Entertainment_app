@@ -21,6 +21,7 @@ function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Input fields for the signup form
   const inputFields = [
     {
       name: "email",
@@ -58,8 +59,10 @@ function Signup() {
     },
   ];
 
+  // Mutation to signup the user From the MediaAPi
   const [postUserSignup, { isLoading }] = usePostUserSignupMutation();
 
+  // Function to handle the form submission
   async function onSubmit(body) {
     try {
       const userData = await postUserSignup(body).unwrap();

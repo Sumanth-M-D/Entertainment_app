@@ -1,3 +1,4 @@
+// Input component for authentication forms
 function InputAuth({ fieldData, register, errors }) {
   const { type, name, validators, placeholder } = fieldData;
 

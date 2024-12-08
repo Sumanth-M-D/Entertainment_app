@@ -4,10 +4,13 @@ import Error from "../general/Error";
 import { useSelector } from "react-redux";
 
 function MediaList({ mediaList, isLoading, error, listType = "general" }) {
+  // Getting the bookmarked media from the store
   const { bookmarks } = useSelector((state) => state.bookmark);
 
+  // Creating a set of bookmarked media ids for faster lookup
   const bookmarkedMediaIds = new Set(bookmarks.map((media) => media.id));
 
+  // Displaying a loader if the data is still loading
   if (isLoading)
     return (
       <div className="h-56">
@@ -15,6 +18,7 @@ function MediaList({ mediaList, isLoading, error, listType = "general" }) {
       </div>
     );
 
+  // Displaying an error message if there was an error fetching the data
   if (error) return <Error error={error} />;
 
   return (

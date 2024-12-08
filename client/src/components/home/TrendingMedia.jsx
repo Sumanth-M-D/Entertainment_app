@@ -3,6 +3,7 @@ import ContentHeading from "../general/ContentHeading";
 import MediaList from "../mediaList/MediaList";
 
 function TrendingMedia() {
+  // Fetch the trending media
   const {
     data: trendingMedia = [],
     error,

@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+// This component is used to protect routes that require authentication (Bookmarks page)
 function Protected({ children }) {
   const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
+  // If user is not authenticated, redirect to login page
   useEffect(() => {
     if (!isAuthenticated) {
       toast.error("Please login to access Bookmarks");
@@ -14,11 +16,12 @@ function Protected({ children }) {
     }
   }, [isAuthenticated, navigate]);
 
+  // While redirecting, don't render children
   if (!isAuthenticated) {
-    // While redirecting, don't render children
     return null;
   }
 
+  // If user is authenticated, render children
   return <>{children}</>;
 }
 

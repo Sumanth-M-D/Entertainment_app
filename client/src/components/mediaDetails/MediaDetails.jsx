@@ -10,18 +10,21 @@ import { FaLink } from "react-icons/fa6";
 import { FaImdb } from "react-icons/fa";
 
 function MediaDetails({ id, type }) {
+  // Fetch the media details
   const {
     data: mediaDetails,
     error: mediaDetailsError,
     isLoading: mediaDetailsLoading,
   } = useGetMediaDetailsQuery({ id, type });
 
+  // Fetch the media casts
   const {
     data: casts,
     error: castsError,
     isLoading: castsIsLoading,
   } = useGetMediaCastQuery({ id, type });
 
+  // If the data is loading, show the loader
   if (mediaDetailsLoading || castsIsLoading)
     return (
       <div className="my-56 w-screen flex justify-center">
@@ -29,10 +32,13 @@ function MediaDetails({ id, type }) {
       </div>
     );
 
+  // If there is an error, show the error message
   if (mediaDetailsError) return <Error error={mediaDetailsError} />;
 
+  // If there is no data, show the error message
   if (!mediaDetails) return <Error error={{ message: "No data found" }} />;
 
+  // Destructure the media details
   const {
     title,
     tagline,
@@ -48,6 +54,7 @@ function MediaDetails({ id, type }) {
     voteCount,
   } = mediaDetails;
 
+  // Destructure the media details based on the type
   let runTime, lastAirDate, impData;
 
   if (type === "movie") {

@@ -5,6 +5,7 @@ const initialState = {
   user: null,
 };
 
+// Slice for the user data
 const userSlice = createSlice({
   name: "userSlice",
   initialState,

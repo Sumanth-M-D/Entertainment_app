@@ -8,6 +8,7 @@ function SearchBar({ placeholder = "Search for movies or TV shows" }) {
   const { inputText } = useSelector((state) => state.searchText);
   const dispatch = useDispatch();
 
+  // Debounce the search text to avoid making too many requests
   const debouncedSetSearchText = useCallback(
     debounce(function (text) {
       dispatch(setSearchText(text));
@@ -15,10 +16,12 @@ function SearchBar({ placeholder = "Search for movies or TV shows" }) {
     [],
   );
 
+  // Update the search text when the input text changes
   useEffect(() => {
     debouncedSetSearchText(inputText);
   }, [inputText, debouncedSetSearchText]);
 
+  // Update the input text when the user types
   function handleChange(e) {
     dispatch(setInputText(e.target.value));
   }
@@ -28,13 +31,14 @@ function SearchBar({ placeholder = "Search for movies or TV shows" }) {
       <label>
         <FaSearch />
       </label>
+
+      {/* Controlled input component.   */}
       <input
         id="search"
         type="text"
         value={inputText}
         onChange={handleChange}
         placeholder={placeholder}
-        // autoComplete="off" // Disable autocomplete
         className="w-full outline-none bg-black border-b-2  border-tertiary p-2 placeholder-zinc-500 placeholder:text-base"
       />
     </div>

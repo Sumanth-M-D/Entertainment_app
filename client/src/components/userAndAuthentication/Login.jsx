@@ -18,6 +18,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Input fields for the login form
   const inputFields = [
     {
       name: "email",
@@ -46,8 +47,10 @@ function Login() {
     },
   ];
 
+  // Mutation to login the user From the MediaAPi
   const [postUserLogin, { isLoading }] = usePostUserLoginMutation();
 
+  // Function to handle the form submission
   async function onSubmit(body) {
     try {
       const userData = await postUserLogin(body).unwrap();

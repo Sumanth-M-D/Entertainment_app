@@ -8,7 +8,7 @@ function BookmarksPage() {
         <div className="">
           <Bookmarks />
         </div>
-      </Applayout>{" "}
+      </Applayout>
     </div>
   );
 }
