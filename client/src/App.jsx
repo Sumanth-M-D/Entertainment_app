@@ -35,17 +35,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+
+        {/* Media routes */}
         <Route path="/movies" element={<MoviesPage />} />
         <Route path="/tvshows" element={<TVShowsPage />} />
-        <Route
-          path="/bookmarks"
-          element={
-            <Protected>
-              <BookmarksPage />
-            </Protected>
-          }
-        />
-
         <Route path="/mediadetails">
           <Route
             path="movies/:id"
@@ -57,6 +50,17 @@ function App() {
           />
         </Route>
 
+        {/* Bookmarks route */}
+        <Route
+          path="/bookmarks"
+          element={
+            <Protected>
+              <BookmarksPage />
+            </Protected>
+          }
+        />
+
+        {/* User account routes */}
         <Route path="/user" element={<UserAccountPage />} />
         <Route path="/useraccount" element={<UserAccountPage />} />
         <Route path="/login" element={<LoginPage />} />

@@ -8,7 +8,7 @@
 export default function asyncHandler(func) {
   return async function (req, res, next) {
     try {
-      await func(req, res, next);
+      await func(req, res, next); // replace (req, res, next) with  (...arguements)
     } catch (err) {
       next(err);
     }

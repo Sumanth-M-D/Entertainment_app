@@ -9,13 +9,43 @@ function Bookmarks() {
     (state) => state.bookmark,
   );
 
+  const bookmarkedMovies = bookmarks.filter(
+    (bookmark) => bookmark.type === "movie",
+  );
+
+  const bookmarkedTVShows = bookmarks.filter(
+    (bookmark) => bookmark.type === "tv",
+  );
+
   return (
-    <div className="mediaSectionContainer">
-      <ContentHeading title="Bookmarks" />
-      {bookmarks.length === 0 && <p className="text-lg">No bookmarks found</p>}
-      {bookmarks.length > 0 && (
-        <MediaList mediaList={bookmarks} isLoading={isLoading} error={error} />
-      )}
+    <div className="">
+      <div className="">
+        <ContentHeading title="Bookmarked movies" />
+        {bookmarkedMovies.length > 0 && (
+          <MediaList
+            mediaList={bookmarkedMovies}
+            isLoading={isLoading}
+            error={error}
+          />
+        )}
+        {bookmarkedMovies.length === 0 && (
+          <p className="text-lg">No bookmarks found.</p>
+        )}
+      </div>
+
+      <div className="mt-20">
+        <ContentHeading title="Bookmarked TV shows" />
+        {bookmarkedTVShows.length > 0 && (
+          <MediaList
+            mediaList={bookmarkedTVShows}
+            isLoading={isLoading}
+            error={error}
+          />
+        )}
+        {bookmarkedTVShows.length === 0 && (
+          <p className="text-lg">No bookmarks found.</p>
+        )}
+      </div>
     </div>
   );
 }
