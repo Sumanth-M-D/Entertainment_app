@@ -51,7 +51,7 @@ input:-ms-input-placeholder {
 
 @layer components {
   body {
-    @apply bg-black font-outfit font-[250] min-h-screen md:p-4 text-white;
+    @apply bg-pink-500 font-outfit font-[250] min-h-screen md:p-4 text-white;
   }
   .sectionBottomMargin {
     @apply mb-8;

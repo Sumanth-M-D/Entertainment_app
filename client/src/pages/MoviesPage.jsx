@@ -10,7 +10,7 @@ function MoviesPage() {
   return (
     <div className="overflow-x-hidden">
       <Applayout>
-        <div className="">
+        <div>
           <SearchBar placeholder="Search for movies " />
           {searchText && <SearchResults type={"movies"} />}
           {!searchText && <Movies />}

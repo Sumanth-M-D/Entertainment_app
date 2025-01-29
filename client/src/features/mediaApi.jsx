@@ -108,7 +108,7 @@ export const mediaApi = createApi({
       },
     }),
 
-    // User login endpoint
+    // User login endpoint 
     postUserLogin: builder.mutation({
       query: ({ email, password }) => ({
         url: "user/login",
